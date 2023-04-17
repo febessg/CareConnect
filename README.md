@@ -1,65 +1,161 @@
-https://dillinger.io/
+# CareConnect
 
-# Nome do software
+O CareConnect é uma API de gerenciamento de clínicas médicas, onde é possível cadastrar pacientes, médicos, enfermeiros e atendimentos realizados, além de listar, encontrar, atualizar e deletar os dados cadastrados.
 
-## Contexto: 
-Essa api resolve problemas de gerencimento de clínicas médicas, tornando possível adicionar, atualizar... pacientes.... DESCREVER O PROBLEMA QUE O SOFTWARE RESOLVE
+## Tecnologias
 
-## Técnicas e padrões utilizados:
-Como o projeto foi organizado em uma estrutura de pastas para melhor visualização e acesso(pastas...)
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-|Pasta | Uso |
+- **Linguagem de programação**: JavaScript
+- **Framework**: Node.js
+- **Banco de dados**: PostgreSQL
+- **Controle de versão**: Git
 
-## Tecnologias utilizadas: 
-O projeto foi desenvolvido utilizando a linguagem javascript com base Node.js framework, utilizando as seguintes dependências externas:
+### Dependências externas
 
-## Dependências externas (TABELA)
+Também foram utilizadas as seguintes dependências na construção da API:
 
-|Plugin | Uso |
-- Express
-- Sequelize - interação com o banco de dados
-- Yup
-- Dotenv
-- pg, pghstore - permite a comunicação com o postgres
+| Plugin | Uso |
+|--------|-----|
+| Express | Framework web utilizado para criar as rotas e endpoints da API |
+| Sequelize | ORM para bancos de dados relacionais, que permite trabalhar com bancos como o PostgreSQL
+|pg e pg-hstore | Bibliotecas utilizadas para realizar a conexão e operações com o banco de dados PostgreSQL
+| Yup | Biblioteca utilizada para a validação dos dados enviados na API |
 
-## Dependências de desenvolvimento (TABELA)
+### Dependências de desenvolvimento
 
-## Endpoints - Rotas da aplicação:
+| Plugin | Uso |
+|--------|-----|
+| Nodemon | Ferramenta utilizada para monitoramento de alterações no código e reinício automático do servidor |
 
-GET/api/pacientes/:id
+## Técnicas e padrões
 
-Retorna as informações de um paciente específico.
+O projeto foi organizado em uma estrutura de pastas, permitindo assim uma visualização e acesso facilitados, para a realização de possíveis correções ou melhorias.
 
-Parâmetros:
-- id(obrigatório): id do paciente desejado
+| Pasta | Uso |
+|-------|--------|
+| Controllers | |
+| Database | |
+| Middlewares | |
+| Models | |
+| Routes | |
 
-Exemplo de resposta:
+## Endpoints disponíveis
 
-'''json
+### POST /api/pacientes
+Este endpoint cadastra um novo paciente no sistema, sendo preciso enviar um objeto JSON com os dados do paciente.
+
+Exemplo de requisição:
+```json
 {
-	"identifier": 1,
-	"name": "Fernanda",
-	"sex": "FEMININO",
-	"date_of_birth": "1997-12-05",
-	"cpf": "12345678912",
-	"phone_number": "(48) 999203206",
-	"emergency_contact": "(48) 996733731",
-	"allergies": "mosquito",
-	"specific_care": "blablabla",
-	"covenant": "unimed",
+	"name": "Ricardo Alves",
+	"sex": "MASCULINO",
+	"date_of_birth": "1962-08-24",
+	"cpf": "09823655213",
+	"phone_number": "(48) 999256898",
+	"emergency_contact": "(48) 984562586",
+	"allergies": "dipirona",
+	"specific_care": "Diabetes tipo II",
+	"health_insurance": "UNIMED",
+	"service_status": "NAO_ATENDIDO"
+}
+```
+Exemplo de resposta:
+```json
+{
+	"total_attendances": 0,
+	"identifier": 9,
+	"name": "Ricardo Alves",
+	"sex": "MASCULINO",
+	"date_of_birth": "1962-08-24",
+	"cpf": "09823655213",
+	"phone_number": "(48) 999256898",
+	"emergency_contact": "(48) 984562586",
+	"allergies": "Dipirona",
+	"specific_care": "Diabetes tipo II",
+	"health_insurance": "UNIMED",
+	"service_status": "NAO_ATENDIDO",
+	"updatedAt": "2023-04-17T22:31:00.743Z",
+	"createdAt": "2023-04-17T22:31:00.743Z"
+}
+```
+
+### PUT /api/pacientes/{identifier}
+Este endpoint atualiza os dados de um paciente específico, de acordo com o id(identifier) informado na URL. É preciso enviar um objeto JSON com o dado que deverá ser atualizado.
+
+Exemplo de requisição:
+```json
+{
+	"health_insurance": "SIDESC"
+}
+```
+Exemplo de resposta:
+```json
+{
+	"identifier": 9,
+	"name": "Ricardo Alves",
+	"sex": "MASCULINO",
+	"date_of_birth": "1962-08-24",
+	"cpf": "09823655213",
+	"phone_number": "(48) 999256898",
+	"emergency_contact": "(48) 984562586",
+	"allergies": "dipirona",
+	"specific_care": "Diabetes tipo II",
+	"health_insurance": "SIDESC",
+	"service_status": "NAO_ATENDIDO",
+	"total_attendances": 0,
+	"createdAt": "2023-04-17T22:31:00.743Z",
+	"updatedAt": "2023-04-17T22:41:48.558Z"
+}
+```
+
+### PUT /api/pacientes/{identifier}/status
+Este endpoint atualiza o status de atendimento de um paciente específico, de acordo com o id(identifier) enviado na URL. É preciso enviar um objeto JSON com o status atualizado.
+
+Exemplo de requisição:
+```json
+{
+	"service_status": "ATENDIDO"
+}
+```
+Exemplo de resposta:
+```json
+{
+	"identifier": 9,
+	"name": "Ricardo Alves",
+	"sex": "MASCULINO",
+	"date_of_birth": "1962-08-24",
+	"cpf": "09823655213",
+	"phone_number": "(48) 999256898",
+	"emergency_contact": "(48) 984562586",
+	"allergies": "dipirona",
+	"specific_care": "Diabetes tipo II",
+	"health_insurance": "SIDESC",
 	"service_status": "ATENDIDO",
 	"total_attendances": 0,
-	"createdAt": "2023-04-12T00:06:56.098Z",
-	"updatedAt": "2023-04-12T00:06:56.098Z"
+	"createdAt": "2023-04-17T22:31:00.743Z",
+	"updatedAt": "2023-04-17T22:47:19.497Z"
 }
-'''
+```
 
-## Instalação - como executar o projeto:
-'''sh
-Clonar o repositório [link do repositório]
-npm install
-npm start
-'''
+### GET /api/pacientes
+Este endpoint retorna uma lista com todos os pacientes cadastrados na clínica. Através dele, também é possível utilizar query params, passando através da URL, para filtrar os pacientes por meio do status de atendimento, com o endpoint `/api/pacientes?service_status=ATENDIDO`
+
+## Instalação
+
+1. Faça um clone desse repositório na sua máquina
+    ```sh
+    git clone https://github.com/febessg/CareConnect.git
+    ```
+    
+2. Instale as bibliotecas necessárias:
+    ```sh
+    npm install
+    ```
+3. Execute a API
+    ```sh
+    npm start
+    ```
 
 ## Possíveis melhorias: 
 o projeto é um mvp, podendo ser realizadas melhorias futuramente, como:
