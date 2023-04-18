@@ -2,6 +2,23 @@
 
 O CareConnect é uma API de gerenciamento de clínicas médicas, onde é possível cadastrar pacientes, médicos, enfermeiros e atendimentos realizados, além de listar, encontrar, atualizar e deletar os dados cadastrados.
 
+## Instalação
+
+1. Faça um clone desse repositório na sua máquina
+    ```sh
+    git clone https://github.com/febessg/CareConnect.git
+    ```
+    
+2. Instale as dependências:
+    ```sh
+    npm install
+    ```
+3. Inicie o servidor
+    ```sh
+    npm start
+    ```
+Após realizar essa sequência de passos, a aplicação estará pronta para ser utilizada!
+
 ## Tecnologias
 
 O projeto foi desenvolvido utilizando as seguintes tecnologias:
@@ -350,7 +367,7 @@ Exemplo de resposta:
 }
 ```
 
-### GET /api/pacientes
+### GET /api/medicos
 Este endpoint retorna uma lista com todos os médicos cadastrados na clínica. Através dele, também é possível utilizar query params, passando através da URL, para filtrar os médicos por meio do estado no sistema, com o endpoint `/api/medicos?status=ATIVO`
 
 Exemplo de resposta:
@@ -465,25 +482,123 @@ Este endpoint deleta um médico específico do sistema, de acordo com o id(ident
 
 ### Enfermeiros:
 
-## Instalação
+### POST /api/enfermeiros
+Este endpoint cadastra um novo enfermeiro no sistema, sendo preciso enviar um objeto JSON com os dados do mesmo.
 
-1. Faça um clone desse repositório na sua máquina
-    ```sh
-    git clone https://github.com/febessg/CareConnect.git
-    ```
-    
-2. Instale as bibliotecas necessárias:
-    ```sh
-    npm install
-    ```
-3. Execute a API
-    ```sh
-    npm start
-    ```
+Exemplo de requisição:
+```json
+{
+	"name": "Claudio Aguiar",
+	"sex": "MASCULINO",
+	"date_of_birth": "1970-06-29",
+	"cpf": "98635648989",
+	"phone_number": "(48) 999654589",
+	"educational_institution": "UFMG",
+	"coren_uf": "88956/MG"
+}
+```
+
+Exemplo de resposta:
+```json
+{
+	"identifier": 2,
+	"name": "Claudio Aguiar",
+	"sex": "MASCULINO",
+	"date_of_birth": "1970-06-29",
+	"cpf": "98635648989",
+	"phone_number": "(48) 999654589",
+	"educational_institution": "UFMG",
+	"coren_uf": "88956/MG",
+	"updatedAt": "2023-04-16T21:07:05.409Z",
+	"createdAt": "2023-04-16T21:07:05.409Z"
+}
+```
+
+### PUT /api/enfermeiros/{identifier}
+Este endpoint atualiza os dados de um enfermeiro específico, de acordo com o id(identifier) informado na URL. É preciso enviar um objeto JSON com o dado que deverá ser atualizado.
+
+Exemplo de requisição:
+```json
+{
+	"phone_number": "(32) 999654589"
+}
+```
+Exemplo de resposta:
+```json
+{
+	"identifier": 1,
+	"name": "César de Oliveira",
+	"sex": "MASCULINO",
+	"date_of_birth": "1984-05-16",
+	"cpf": "98635648944",
+	"phone_number": "(32) 999654589",
+	"educational_institution": "PUC",
+	"coren_uf": "89765/RJ",
+	"createdAt": "2023-04-16T21:04:58.903Z",
+	"updatedAt": "2023-04-18T15:07:09.043Z"
+}
+```
+
+### GET /api/enfermeiros
+Este endpoint retorna uma lista com todos os enfermeiros cadastrados na clínica.
+
+Exemplo de resposta:
+```json
+[
+	{
+		"identifier": 1,
+		"name": "César de Oliveira",
+		"sex": "MASCULINO",
+		"date_of_birth": "1984-05-16",
+		"cpf": "98635648944",
+		"phone_number": "(32) 999654589",
+		"educational_institution": "PUC",
+		"coren_uf": "89765/RJ",
+		"createdAt": "2023-04-16T21:04:58.903Z",
+		"updatedAt": "2023-04-18T15:07:09.043Z"
+	},
+	{
+		"identifier": 2,
+		"name": "Amanda da Silva",
+		"sex": "FEMININO",
+		"date_of_birth": "1994-02-23",
+		"cpf": "56423102598",
+		"phone_number": "(48) 991652345",
+		"educational_institution": "UFSC",
+		"coren_uf": "87945/SC",
+		"createdAt": "2023-04-18T15:12:14.520Z",
+		"updatedAt": "2023-04-18T15:12:14.520Z"
+	}
+]
+```
+
+### GET /api/enfermeiros/{identifier}
+Este endpoint retorna um enfermeiro específico de acordo com o id(identifier) fornecido através da URL.
+
+Exemplo de resposta:
+```json
+{
+	"identifier": 2,
+	"name": "Amanda da Silva",
+	"sex": "FEMININO",
+	"date_of_birth": "1994-02-23",
+	"cpf": "56423102598",
+	"phone_number": "(48) 991652345",
+	"educational_institution": "UFSC",
+	"coren_uf": "87945/SC",
+	"createdAt": "2023-04-18T15:12:14.520Z",
+	"updatedAt": "2023-04-18T15:12:14.520Z"
+}
+```
+
+### DELETE /api/enfermeiros/{identifier}
+Este endpoint deleta um enfermeiro específico do sistema, de acordo com o id(identifier) fornecido através da URL. Não é necessário enviar nada no corpo da requisição e não retorna nada no corpo da resposta.
 
 ## Possíveis melhorias: 
-o projeto é um mvp, podendo ser realizadas melhorias futuramente, como:
- - blablabla
- - blablabla
- - blablabla
+Este projeto é um MVP (Produto Viável Mínimo), portanto podem vir a ser realizadas melhorias futuramente, dentre elas:
+
+ - Melhoria da rota de atendimento para que possa haver o registro da evolução médica, onde, além de fornecer os identificadores do médico e do paciente, possam ser registradas as informações a respeito do atendimento;
+ - Criação de rota para requisição de exames, onde seja informando o identificador do médico solicitante e do paciente a quem será solicitado, além do exame em questão.
+
+A implementação das melhorias citadas proporcionará um sistema de gerencimento mais completo, facilitando assim o controle dos atendimentos, possibilitando consultas rápidas a respeito dos mesmos e simplificando a requisição de exames, de forma que tudo fique registrado em um sistema seguro e acessível.
 
