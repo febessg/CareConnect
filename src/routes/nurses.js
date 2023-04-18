@@ -1,5 +1,6 @@
 const Router = require('express');
 
+const validateToken = require('../middlewares/validateToken');
 const validateNurse = require('../middlewares/validateNurse');
 
 const createNurse = require('../controllers/nurses/createNurse');
@@ -10,10 +11,10 @@ const deleteNurse = require('../controllers/nurses/deleteNurse');
 
 const nursesRoutes = new Router();
 
-nursesRoutes.post('/api/enfermeiros', validateNurse, createNurse);
-nursesRoutes.put('/api/enfermeiros/:identifier', validateNurse, updateNurse);
-nursesRoutes.get('/api/enfermeiros', findNurse);
-nursesRoutes.get('/api/enfermeiros/:identifier', findOneNurse);
-nursesRoutes.delete('/api/enfermeiros/:identifier', deleteNurse);
+nursesRoutes.post('/api/enfermeiros', validateToken, validateNurse, createNurse);
+nursesRoutes.put('/api/enfermeiros/:identifier', validateToken, validateNurse, updateNurse);
+nursesRoutes.get('/api/enfermeiros', validateToken, findNurse);
+nursesRoutes.get('/api/enfermeiros/:identifier', validateToken, findOneNurse);
+nursesRoutes.delete('/api/enfermeiros/:identifier', validateToken, deleteNurse);
 
 module.exports = nursesRoutes;

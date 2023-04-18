@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const connection = require('./src/database/index');
 
+const loginRoute = require('./src/routes/login');
 const patientsRoutes = require('./src/routes/patients');
 const doctorsRoutes = require('./src/routes/doctors');
 const nursesRoutes = require('./src/routes/nurses');
@@ -13,6 +14,7 @@ app.use(express.json());
 
 connection.sync({alter: true});
 
+app.use(loginRoute);
 app.use(patientsRoutes);
 app.use(doctorsRoutes);
 app.use(nursesRoutes);
