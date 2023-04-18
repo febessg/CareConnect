@@ -51,11 +51,11 @@ O projeto foi organizado em uma estrutura de pastas, permitindo assim uma visual
 
 | Pasta | Uso |
 |-------|--------|
-| Controllers | |
-| Database | |
-| Middlewares | |
-| Models | |
-| Routes | |
+| Controllers | Onde estão armazenados os arquivos .js responsáveis por gerenciar as requisições HTTP e retornar as respostas adequadas. |
+| Database | Onde está localizado o arquivo responsável pela conexão com o banco de dados. |
+| Middlewares | Pasta que contém as funções de validação do projeto. |
+| Models | Contém os modelos utilizados para definir a estrutura dos dados que serão armazenados e consultados no banco de dados. |
+| Routes | Contém as rotas da API, que fazem o mapeamente das URLs e métodos HTTP para os respectivos controllers. |
 
 ## Endpoints disponíveis
 
