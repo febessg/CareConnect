@@ -594,6 +594,61 @@ Exemplo de resposta:
 ### DELETE /api/enfermeiros/{identifier}
 Este endpoint deleta um enfermeiro específico do sistema, de acordo com o id(identifier) fornecido através da URL. Não é necessário enviar nada no corpo da requisição e não retorna nada no corpo da resposta.
 
+### POST /api/atendimentos
+Este endpoint cadastra um novo atendimento no sistema, sendo preciso enviar um objeto JSON com o identificador do médico e do paciente.
+
+Exemplo de requisição:
+```json
+{
+	"doctor_id": 1,
+	"patient_id": 4
+}
+```
+
+Exemplo de resposta:
+```json
+{
+	"atendimento": {
+		"identifier": 10,
+		"doctor_id": 1,
+		"patient_id": 4,
+		"updatedAt": "2023-04-17T15:10:11.579Z",
+		"createdAt": "2023-04-17T15:10:11.579Z"
+	},
+	"medico": {
+		"identifier": 1,
+		"name": "Pedro Ermel",
+		"sex": "MASCULINO",
+		"date_of_birth": "1995-06-21",
+		"cpf": "12325648965",
+		"phone_number": "(48) 986546321",
+		"educational_institution": "UNISUL TUBARÃO",
+		"crm_uf": "83748718/SC",
+		"clinical_specialization": "CLINICO_GERAL",
+		"status": "ATIVO",
+		"total_attendances": 2,
+		"createdAt": "2023-04-15T19:45:22.251Z",
+		"updatedAt": "2023-04-17T15:10:11.594Z"
+	},
+	"paciente": {
+		"identifier": 4,
+		"name": "Fernanda",
+		"sex": "FEMININO",
+		"date_of_birth": "1997-12-05",
+		"cpf": "12345678912",
+		"phone_number": "(48) 999203206",
+		"emergency_contact": "(48) 996733731",
+		"allergies": "mosquito",
+		"specific_care": "blablabla",
+		"health_insurance": "UNIMED",
+		"service_status": "ATENDIDO",
+		"total_attendances": 1,
+		"createdAt": "2023-04-15T17:58:48.191Z",
+		"updatedAt": "2023-04-17T15:10:11.600Z"
+	}
+}
+```
+
 ## Possíveis melhorias: 
 Este projeto é um MVP (Produto Viável Mínimo), portanto podem vir a ser realizadas melhorias futuramente, dentre elas:
 
