@@ -34,7 +34,7 @@ async function createDoctor(req, res) {
 
         const doctor = await Doctor.create(data);
 
-        res.status(201).json({data, identificador: doctor.identifier, atendimentos: doctor.total_attendances});
+        res.status(201).json({identificador: doctor.identifier,data, atendimentos: doctor.total_attendances});
 
     } catch (error) {
         return res.status(500).json({message: "Não foi possível processar a solicitação"}) 
