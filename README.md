@@ -1,6 +1,6 @@
 # CareConnect
 
-O CareConnect é uma API de gerenciamento de clínicas médicas, onde é possível cadastrar pacientes, médicos, enfermeiros e atendimentos realizados, além de listar, encontrar, atualizar e deletar os dados cadastrados.
+O CareConnect é uma API de gerenciamento de clínicas médicas, onde é possível cadastrar pacientes, médicos, enfermeiros e atendimentos realizados, além de listar, encontrar, atualizar e deletar os dados cadastrados. Para realizar estas operações no sistema, é necessário realizar login, para isso o usuário, que deve ser um médico ou enfermeiro cadastrado, deverá informar o CPF e senha do sistema. Dessa forma, é possível manter a segurança dos dados cadastrados no sistema.
 
 ## Instalação
 
@@ -38,6 +38,9 @@ Também foram utilizadas as seguintes dependências na construção da API:
 | Sequelize | ORM para bancos de dados relacionais, que permite trabalhar com bancos como o PostgreSQL
 |pg e pg-hstore | Bibliotecas utilizadas para realizar a conexão e operações com o banco de dados PostgreSQL
 | Yup | Biblioteca utilizada para a validação dos dados enviados na API |
+| Bcrypt | Biblioteca utilizada para criptografar senhas de usuários |
+| Jsonwebtoken | Biblioteca utilizada para autenticação e geração de tokens JWT |
+| Dotenv | Biblioteca utilizada para carregar variáveis de ambiente a partir de um arquivo .env |
 
 ### Dependências de desenvolvimento
 
@@ -58,6 +61,29 @@ O projeto foi organizado em uma estrutura de pastas, permitindo assim uma visual
 | Routes | Contém as rotas da API, que fazem o mapeamente das URLs e métodos HTTP para os respectivos controllers. |
 
 ## Endpoints disponíveis
+
+### Login:
+
+### POST /api/login
+Este endpoint é utilizado para realizar o login no sistema, sendo preciso enviar um objeto JSON pelo corpo da requisição com o cpf do usuário e a senha do sistema.
+
+Exemplo de requisição:
+```json
+{
+	"cpf": "12325644566",
+	"password": "careconnect2023"
+}
+```
+
+Exemplo de resposta:
+```json
+{
+	"name": "Pedro Ermel",
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgxODQ2NDg3LCJleHAiOjE2ODE4NTAwODd9.MoZgOoODoPTdriSSr5P88mTeXrSU3ioPjGlaLXMYTzY"
+}
+```
+
+### Pacientes:
 
 ### POST /api/pacientes
 Este endpoint cadastra um novo paciente no sistema, sendo preciso enviar um objeto JSON com os dados do paciente.
