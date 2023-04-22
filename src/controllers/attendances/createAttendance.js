@@ -15,6 +15,10 @@ async function createAttendance(req, res) {
         if (!patientId) {
             return res.status(404).json({message: 'Paciente não encontrado'})
         };
+        
+        if (doctorInDb.status === 'INATIVO') {
+            return res.status(400).json({message: 'Médico inativo.'})
+        }
 
         const data = {
             doctor_id: req.body.doctor_id,
