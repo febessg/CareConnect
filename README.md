@@ -2,7 +2,7 @@
 
 O CareConnect é uma API de gerenciamento de clínicas médicas, onde é possível cadastrar pacientes, médicos, enfermeiros e atendimentos realizados, além de listar, encontrar, atualizar e deletar os dados cadastrados. Para realizar estas operações no sistema, é necessário realizar login, para isso o usuário, que deve ser um médico ou enfermeiro cadastrado, deverá informar o CPF e senha do sistema. Dessa forma, é possível manter a segurança dos dados cadastrados no sistema.
 
-## Instalação
+## Como utilizar:
 
 1. Faça um clone desse repositório na sua máquina
     ```sh
